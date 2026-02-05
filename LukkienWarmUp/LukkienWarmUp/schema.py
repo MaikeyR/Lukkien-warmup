@@ -12,8 +12,8 @@ class CommentType(DjangoObjectType):
     model = Comment
 
 class Query(graphene.ObjectType):
-  projects = graphene.List(ProjectType)
-  comments = graphene.List(CommentType)
+  projects = graphene.List(graphene.NonNull(ProjectType), required=True)
+  comments = graphene.List(graphene.NonNull(CommentType), required=True)
 
   def resolve_projects(self, info, **kwargs):
     return Project.objects.all()

@@ -1,6 +1,8 @@
-import { ProjectType } from '@/features/generated/types';
+import type { ProjectsQuery } from '@/features/projects/generated/queries.graphql';
 
-export function ProjectList({ projects }: { projects: ProjectType[] }) {
+type Project = ProjectsQuery['projects'][number];
+
+export function ProjectList({ projects }: { projects: Project[] }) {
   return (
     <div>
       <ul>

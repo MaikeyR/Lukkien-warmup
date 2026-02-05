@@ -7,9 +7,7 @@ const ProjectsPage = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const projects = (data?.projects ?? []).filter(
-    (project): project is NonNullable<typeof project> => Boolean(project)
-  );
+  const projects = (data?.projects ?? []);
 
   return (
     <div>

@@ -31,6 +31,6 @@ export type ProjectType = {
 
 export type Query = {
   __typename?: 'Query';
-  comments?: Maybe<Array<Maybe<CommentType>>>;
-  projects?: Maybe<Array<Maybe<ProjectType>>>;
+  comments: Array<CommentType>;
+  projects: Array<ProjectType>;
 };

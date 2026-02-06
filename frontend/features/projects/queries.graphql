@@ -5,3 +5,38 @@ query Projects {
     content
   }
 }
+
+query Project($id: ID!) {
+  project(id: $id) {
+    id
+    title
+    content
+  }
+}
+
+mutation CreateProject($title: String!, $content: String!) {
+  createProject(title: $title, content: $content) {
+    project {
+      id
+      title
+      content
+    }
+  }
+}
+
+mutation UpdateProject($id: ID!, $title: String, $content: String) {
+  updateProject(id: $id, title: $title, content: $content) {
+    project {
+      id
+      title
+      content
+    }
+  }
+}
+
+mutation DeleteProject($id: ID!) {
+  deleteProject(id: $id) {
+    ok
+    id
+  }
+}

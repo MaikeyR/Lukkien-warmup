@@ -21,6 +21,42 @@ export type CommentType = {
   project: ProjectType;
 };
 
+export type CreateProject = {
+  __typename?: 'CreateProject';
+  project?: Maybe<ProjectType>;
+};
+
+export type DeleteProject = {
+  __typename?: 'DeleteProject';
+  id?: Maybe<Scalars['ID']['output']>;
+  ok?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createProject?: Maybe<CreateProject>;
+  deleteProject?: Maybe<DeleteProject>;
+  updateProject?: Maybe<UpdateProject>;
+};
+
+
+export type MutationCreateProjectArgs = {
+  content: Scalars['String']['input'];
+  title: Scalars['String']['input'];
+};
+
+
+export type MutationDeleteProjectArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationUpdateProjectArgs = {
+  content?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['ID']['input'];
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type ProjectType = {
   __typename?: 'ProjectType';
   comments: Array<CommentType>;
@@ -32,5 +68,16 @@ export type ProjectType = {
 export type Query = {
   __typename?: 'Query';
   comments: Array<CommentType>;
+  project?: Maybe<ProjectType>;
   projects: Array<ProjectType>;
+};
+
+
+export type QueryProjectArgs = {
+  id: Scalars['ID']['input'];
+};
+
+export type UpdateProject = {
+  __typename?: 'UpdateProject';
+  project?: Maybe<ProjectType>;
 };

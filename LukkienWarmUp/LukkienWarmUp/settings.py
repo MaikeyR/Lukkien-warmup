@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "graphene_django",
+    'corsheaders',
+    'graphene_django',
     'projects',
     'comments',
 ]
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'LukkienWarmUp.urls'
@@ -112,6 +114,13 @@ AUTH_PASSWORD_VALIDATORS = [
 GRAPHENE = {
     "SCHEMA": "LukkienWarmUp.schema.schema"
 }
+
+# CORS
+# https://pypi.org/project/django-cors-headers/
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
 
 
 # Internationalization

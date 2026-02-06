@@ -1,3 +1,5 @@
+'use client';
+
 import { ProjectList } from '@/features/projects/components/ProjectList';
 import { useProjectsQuery } from '@/features/projects/generated/queries.graphql';
 

@@ -2,7 +2,6 @@ query Projects {
   projects {
     id
     title
-    content
   }
 }
 

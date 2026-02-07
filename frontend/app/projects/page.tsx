@@ -2,6 +2,7 @@
 
 import { ProjectList } from '@/features/projects/components/ProjectList';
 import { useProjectsQuery } from '@/features/projects/generated/queries.graphql';
+import Link from 'next/link';
 
 const ProjectsPage = () => {
   const { loading, error, data } = useProjectsQuery();
@@ -13,8 +14,18 @@ const ProjectsPage = () => {
 
   return (
     <div>
-      <h1>Projects</h1>
-      <ProjectList projects={projects} />
+      <div>
+        <h1>Projects</h1>
+        <ProjectList projects={projects} />
+      </div>
+      <hr className="my-4 h-px bg-gray-600" />
+      <div>
+        <Link href={`/projects/new`}
+              className="block p-4 border rounded hover:bg-gray-600"
+        >
+          <h3>New project</h3>
+        </Link>
+      </div>
     </div>
   );
 };

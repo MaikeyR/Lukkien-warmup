@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "codegen": "graphql-codegen --config codegen.yml",
-    "codegen:w": "npm run codegen -- --watch"
+    "codegen:w": "npm run codegen -- --watch",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "dependencies": {
     "@apollo/client": "^3.12.0",
@@ -20,6 +22,8 @@
     "react-redux": "^9.2.0"
   },
   "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^24.0.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
     "@graphql-codegen/cli": "^6.1.1",
     "@graphql-codegen/near-operation-file-preset": "^4.0.0",
     "@graphql-codegen/typescript": "^5.0.7",
@@ -30,9 +34,14 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cypress": "^15.10.0",
+    "esbuild": "^0.27.3",
     "eslint": "^9",
     "eslint-config-next": "16.1.5",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": "cypress/e2e/**/*.steps.ts"
   }
 }

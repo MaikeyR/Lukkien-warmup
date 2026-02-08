@@ -106,11 +106,12 @@ def test_update_project_mutation(gql_client):
   response = gql_post(
     gql_client,
     mutation,
-    variables={"id": str(project.id), "title": "New"},
+    variables={"id": str(project.id), "title": "New", "content": "Body"},
   )
   assert response.status_code == 200
   data = response.json()["data"]["updateProject"]["project"]
   assert data["title"] == "New"
+  assert data["content"] == "Body"
   project.refresh_from_db()
   assert project.title == "New"
 

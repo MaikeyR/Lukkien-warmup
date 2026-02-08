@@ -14,6 +14,7 @@
 
 # testing
 /coverage
+*.coverage
 
 # next.js
 /.next/
@@ -57,3 +58,4 @@ build
 local
 .Python
 .pytest_cache
+

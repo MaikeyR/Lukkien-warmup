@@ -40,28 +40,6 @@ class CreateProject(graphene.Mutation):
     project = Project.objects.create(title=title, content=content)
     return CreateProject(project=project)
 
-# Example (commented) showing how to return a typed GraphQL error with extensions:
-#
-# from graphql import GraphQLError
-#
-# class CreateProject(graphene.Mutation):
-#   class Arguments:
-#     title = graphene.String(required=True)
-#     content = graphene.String(required=True)
-#
-#   project = graphene.Field(ProjectType)
-#
-#   def mutate(self, info, title, content):
-#     # Example: key vault dependency failure
-#     if not title:
-#       raise GraphQLError(
-#         "Key vault unavailable",
-#         extensions={"code": "KEY_VAULT_ERROR"}
-#       )
-#     project = Project.objects.create(title=title, content=content)
-#     return CreateProject(project=project)
-
-
 class UpdateProject(graphene.Mutation):
   class Arguments:
     id = graphene.ID(required=True)

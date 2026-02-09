@@ -4,7 +4,7 @@ module.exports = (api) => {
   return {
     presets: ["next/babel"],
     plugins: isCoverage
-      ? [["istanbul", { exclude: ["app/layout.tsx", ".next/**"] }]]
+      ? [["istanbul", { exclude: ["app/layout.tsx", ".next/**", "features/**/generated/**"] }]]
       : [],
   };
 };

@@ -6,6 +6,17 @@ let projectContent = "";
 let updatedTitle = "";
 let updatedContent = "";
 
+const ensureProjectExists = () => {
+  if (projectTitle) return;
+  projectTitle = `Project ${Date.now()}`;
+  projectContent = `Content ${Date.now()}`;
+  cy.contains("a", "New project").click();
+  cy.get("input#title").clear().type(projectTitle);
+  cy.get("textarea#content").clear().type(projectContent);
+  cy.contains("button", "Create").click();
+  cy.contains("h3", projectTitle, { timeout: 10000 }).should("be.visible");
+};
+
 // Scenario: Open the projects page
 Given("I open the projects page", () => {
   cy.visit("/projects");
@@ -32,6 +43,7 @@ Then("I should see the project in the list", () => {
 
 // Scenario: Edit a project
 When("I open the project detail page", () => {
+  ensureProjectExists();
   cy.contains("h3", projectTitle).click();
 });
 
@@ -41,6 +53,7 @@ Then("I should see the project details", () => {
 });
 
 When("I edit the project", () => {
+  ensureProjectExists();
   updatedTitle = `Updated ${Date.now()}`;
   updatedContent = `Updated content ${Date.now()}`;
 
@@ -48,6 +61,8 @@ When("I edit the project", () => {
   cy.get("input#title").clear().type(updatedTitle);
   cy.get("textarea#content").clear().type(updatedContent);
   cy.contains("button", "Update").click();
+  projectTitle = updatedTitle;
+  projectContent = updatedContent;
 });
 
 Then("I should see the updated project in the list", () => {
@@ -56,6 +71,7 @@ Then("I should see the updated project in the list", () => {
 
 // Scenario: Delete a project
 When("I delete the project", () => {
+  ensureProjectExists();
   cy.contains("h3", projectTitle).click();
   cy.contains("button", "Delete").click();
 });

@@ -1,0 +1,9 @@
+Django==6.0.1
+django-cors-headers==4.9.0
+graphene==3.4.3
+graphene-django==3.2.3
+psycopg==3.3.2
+psycopg-binary==3.3.2
+pytest==9.0.2
+pytest-cov==7.0.0
+pytest-django==4.11.1

@@ -1,0 +1,60 @@
+stages:
+  - test
+
+variables:
+  POSTGRES_DB: lukkien_warmup
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_HOST: postgres
+  POSTGRES_PORT: "5432"
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+    - frontend/node_modules/
+
+backend_tests:
+  stage: test
+  image: python:3.12
+  services:
+    - name: postgres:16
+      alias: postgres
+  script:
+    - python -m pip install --upgrade pip
+    - pip install -r LukkienWarmUp/requirements.txt
+    - python LukkienWarmUp/manage.py migrate
+    - pytest -c LukkienWarmUp/pytest.ini
+
+frontend_tests:
+  stage: test
+  image: node:20
+  script:
+    - cd frontend
+    - npm ci
+    - npm run lint
+    - npm run build
+
+cypress_e2e:
+  stage: test
+  image: cypress/included:15.10.0
+  services:
+    - name: postgres:16
+      alias: postgres
+  script:
+    - apt-get update && apt-get install -y python3 python3-pip
+    - python3 -m pip install --upgrade pip
+    - pip3 install -r LukkienWarmUp/requirements.txt
+    - python3 LukkienWarmUp/manage.py migrate
+    - python3 LukkienWarmUp/manage.py runserver 0.0.0.0:8000 &
+    - cd frontend
+    - npm ci
+    - npm run build
+    - npm run start -- --hostname 0.0.0.0 --port 3000 &
+    - sleep 10
+    - npm run cy:run
+  artifacts:
+    when: always
+    paths:
+      - frontend/cypress/screenshots
+      - frontend/cypress/videos

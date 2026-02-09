@@ -2,6 +2,7 @@ import { defineConfig } from "cypress";
 import createBundler from "@bahmutov/cypress-esbuild-preprocessor";
 import { addCucumberPreprocessorPlugin } from "@badeball/cypress-cucumber-preprocessor";
 import { createEsbuildPlugin } from "@badeball/cypress-cucumber-preprocessor/esbuild";
+import codeCoverageTask from "@cypress/code-coverage/task";
 
 export default defineConfig({
   e2e: {
@@ -12,6 +13,7 @@ export default defineConfig({
       await addCucumberPreprocessorPlugin(on, {
         ...config,
       });
+      codeCoverageTask(on, config);
       on(
         "file:preprocessor",
         createBundler({

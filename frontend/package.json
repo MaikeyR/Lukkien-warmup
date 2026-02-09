@@ -10,7 +10,9 @@
     "codegen": "graphql-codegen --config codegen.yml",
     "codegen:w": "npm run codegen -- --watch",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "cy:open:cov": "cross-env CYPRESS_COVERAGE=true cypress open",
+    "cy:run:cov": "cross-env CYPRESS_COVERAGE=true cypress run"
   },
   "dependencies": {
     "@apollo/client": "^3.12.0",
@@ -22,8 +24,10 @@
     "react-redux": "^9.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.0",
     "@badeball/cypress-cucumber-preprocessor": "^24.0.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
+    "@cypress/code-coverage": "^3.14.7",
     "@graphql-codegen/cli": "^6.1.1",
     "@graphql-codegen/near-operation-file-preset": "^4.0.0",
     "@graphql-codegen/typescript": "^5.0.7",
@@ -34,6 +38,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "babel-plugin-istanbul": "^7.0.1",
+    "cross-env": "^10.1.0",
     "cypress": "^15.10.0",
     "esbuild": "^0.27.3",
     "eslint": "^9",
